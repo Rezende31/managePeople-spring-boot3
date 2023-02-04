@@ -18,11 +18,12 @@ public class UserController {
 	@GetMapping
 	public ResponseEntity<User> findAll(){
 		Address testAdress = new Address();
+		
 		Date date = new Date();
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 		
 		
-		User test = new User(1L,"teste" , date, testAdress);
+		User test = new User(1L,"teste" , null, testAdress);
 		
 		return ResponseEntity.ok().body(test);
 	}

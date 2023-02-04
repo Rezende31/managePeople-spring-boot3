@@ -19,6 +19,7 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	private String name;
 	private Date date;
 	private Address address;
@@ -39,33 +40,49 @@ public class User implements Serializable {
 		return id;
 	}
 
+
+
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+
 
 	public String getName() {
 		return name;
 	}
 
+
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+
 
 	public Date getDate() {
 		return date;
 	}
 
+
+
 	public void setDate(Date date) {
 		this.date = date;
 	}
+
+
 
 	public Address getAddress() {
 		return address;
 	}
 
+
+
 	public void setAddress(Address address) {
 		this.address = address;
 	}
+
+
 
 	@Override
 	public int hashCode() {
