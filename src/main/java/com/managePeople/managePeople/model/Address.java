@@ -3,10 +3,17 @@ package com.managePeople.managePeople.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "tb_address") 
 public class Address implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
 	private Long id;
 	private String logradouro;
 	private Integer cep;
