@@ -34,9 +34,9 @@ public class TestConfig implements CommandLineRunner {
 		Date data1 = formato.parse("23/11/1996");
 		Date data2 = formato.parse("23/09/1998");
 		
-		User u1 = new User(null, "Rodrigo", data1);
+		User u1 = new User(null, "teste", data1);
 		User u2 = new User(null, "Bruno", data2);
-		User u3 = new User(null, "Murilo", null);
+		User u3 = new User(null, "eu", null);
 		
 		Address a1 = new Address(null, "test Logradouro", 123456, 611, "Campinas", u1);
 		Address a2 = new Address(null, "test Logradouro", 13341089, 1036, "Vinhedo", u1);
