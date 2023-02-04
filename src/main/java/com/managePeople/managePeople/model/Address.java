@@ -3,6 +3,8 @@ package com.managePeople.managePeople.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,22 +28,23 @@ public class Address implements Serializable{
 	private Integer number;
 	private String city;
 	
+	//@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "client_id")
-	private User client;
+	@JoinColumn(name = "owner_id")
+	private User owner;
 	
 	public Address() {
 		super();
 	}
 
-	public Address(Long id, String logradouro, Integer cep, Integer number, String city, User client) {
+	public Address(Long id, String logradouro, Integer cep, Integer number, String city, User owner) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
 		this.cep = cep;
 		this.number = number;
 		this.city = city;
-		this.client = client;
+		this.owner = owner;
 	}
 
 	public Long getId() {
@@ -84,12 +87,12 @@ public class Address implements Serializable{
 		this.city = city;
 	}
 
-	public User getClient() {
-		return client;
+	public User getOwner() {
+		return owner;
 	}
 
-	public void setClient(User client) {
-		this.client = client;
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 	@Override

@@ -6,6 +6,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -23,9 +26,12 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String name;
+	
+	@JsonFormat(pattern="yyyy-MM-dd")
 	private Date date;
 	
-	@OneToMany(mappedBy = "client")
+	@JsonIgnore
+	@OneToMany(mappedBy = "owner")
 	private List<Address> addresses = new ArrayList<>();
 	
 	public User() {
