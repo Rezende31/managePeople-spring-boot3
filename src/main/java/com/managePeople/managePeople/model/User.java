@@ -1,13 +1,16 @@
 package com.managePeople.managePeople.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -19,70 +22,56 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
 	private String name;
 	private Date date;
-	private Address address;
+	
+	@OneToMany(mappedBy = "client")
+	private List<Address> addresses = new ArrayList<>();
 	
 	public User() {
 		super();
 	}
 
-	public User(Long id, String name, Date date, Address address) {
+
+	public User(Long id, String name, Date date) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.date = date;
-		this.address = address;
 	}
+
 
 	public Long getId() {
 		return id;
 	}
 
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 
 	public String getName() {
 		return name;
 	}
 
-
-
 	public void setName(String name) {
 		this.name = name;
 	}
-
-
 
 	public Date getDate() {
 		return date;
 	}
 
-
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
 
-
-
-	public Address getAddress() {
-		return address;
+	public List<Address> getAddresses() {
+		return addresses;
 	}
 
-
-
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setAddresses(List<Address> addresses) {
+		this.addresses = addresses;
 	}
-
-
 
 	@Override
 	public int hashCode() {

@@ -26,16 +26,15 @@ public class TestConfig implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 		//quando aplicação iniciada ele roda aqui
 		
-		Address a1 = new Address(null, "test Logradouro", 123456, 611, "Campinas");
-		Address a2 = new Address(null, "test Logradouro", 13341089, 1036, "Vinhedo");
-		
 		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
 		Date data1 = formato.parse("23/11/1996");
 		Date data2 = formato.parse("23/09/1668");
 		
+		User u1 = new User(null, "Rodrigo", data1);
+		User u2 = new User(null, "Bruno", data2);
 		
-		User u1 = new User(null, "Rodrigo", data1, null);
-		User u2 = new User(null, "Bruno", data2, null);
+		Address a1 = new Address(null, "test Logradouro", 123456, 611, "Campinas", u1);
+		Address a2 = new Address(null, "test Logradouro", 13341089, 1036, "Vinhedo", u1);
 		
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		

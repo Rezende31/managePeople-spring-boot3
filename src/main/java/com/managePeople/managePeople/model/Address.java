@@ -7,6 +7,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,18 +26,22 @@ public class Address implements Serializable{
 	private Integer number;
 	private String city;
 	
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private User client;
 	
 	public Address() {
 		super();
 	}
 
-	public Address(Long id, String logradouro, Integer cep, Integer number, String city) {
+	public Address(Long id, String logradouro, Integer cep, Integer number, String city, User client) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
 		this.cep = cep;
 		this.number = number;
 		this.city = city;
+		this.client = client;
 	}
 
 	public Long getId() {
@@ -76,6 +82,14 @@ public class Address implements Serializable{
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public User getClient() {
+		return client;
+	}
+
+	public void setClient(User client) {
+		this.client = client;
 	}
 
 	@Override
