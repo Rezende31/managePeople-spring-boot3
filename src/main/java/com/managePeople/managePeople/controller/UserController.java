@@ -1,30 +1,34 @@
 package com.managePeople.managePeople.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.managePeople.managePeople.model.Address;
 import com.managePeople.managePeople.model.User;
+import com.managePeople.managePeople.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")
 public class UserController {
+	
+	@Autowired
+	private UserService service;
 
 	@GetMapping
-	public ResponseEntity<User> findAll(){
-		Address testAdress = new Address();
+	public ResponseEntity<List<User>> findAll(){
+		List<User> list = service.findAll();
 		
-		Date date = new Date();
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		
-		
-		User test = new User(1L,"teste" , null, testAdress);
-		
-		return ResponseEntity.ok().body(test);
+		return ResponseEntity.ok().body(list);
+	}
+	
+	@GetMapping(value = "/{id}")
+	public ResponseEntity<User> findById(@PathVariable Long id){
+		User user = service.findById(id);
+		return ResponseEntity.ok().body(user);
 	}
 }
