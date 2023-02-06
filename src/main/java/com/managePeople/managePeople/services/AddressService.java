@@ -23,4 +23,8 @@ public class AddressService {
 		Optional<Address> obj = repository.findById(id);
 		return obj.get();
 	}
+	
+	public Address insert( Address address) {
+		return repository.save(address);
+	}
 }
