@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.managePeople.managePeople.model.Address;
 import com.managePeople.managePeople.repositories.AddressRepository;
+import com.managePeople.managePeople.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class AddressService {
@@ -22,7 +23,7 @@ public class AddressService {
 
 	public Address findById(Long id) {
 		Optional<Address> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id)) ;
 	}
 	
 	public Address insert( Address address) {
