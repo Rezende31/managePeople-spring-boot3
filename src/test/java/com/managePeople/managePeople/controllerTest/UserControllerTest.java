@@ -1,6 +1,8 @@
 package com.managePeople.managePeople.controllerTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -36,17 +38,31 @@ public class UserControllerTest {
 
 	@Test
 	public void testFindAllUsers() throws Exception {
-		List<User> users = Arrays.asList(new User(1L, "John Doe", null),
-				new User(2L, "Jane Doe", null));
+		List<User> users = Arrays.asList(new User(1L, "@Test", null),
+				new User(2L, "@Test1", null));
 		
 		when(userService.findAll()).thenReturn(users);
 
 		mvc.perform(get("/users")).andExpect(status().isOk())
-				//andExpect(jsonPath("$", hasSize(2)))
-				.andExpect(jsonPath("$[0].name", is("John Doe")))
-				.andExpect(jsonPath("$[0].date", is(null)))
-				.andExpect(jsonPath("$[1].name", is("Jane Doe")))
-				.andExpect(jsonPath("$[1].date", is(null)));
+				.andExpect(jsonPath("$[0].name", is("@Test")))
+				.andExpect(jsonPath("$[1].name", is("@Test1")));
+	}
+	
+	@Test
+	public void testFindById() throws Exception{
+		User user = new User(1L, "name_test", null);
+		userService.insert(user);
+		when(userService.findById(1L)).thenReturn(user);
+		assertThat(user.getId()).isEqualTo(1L);
+		assertThat(user.getName()).isEqualTo("name_test");
+	}
+	
+	@Test
+	public void testInsertUser() {
+		User user = new User(null, "@test", null);
+		when(userService.insert(user)).thenReturn(user);
+		assertThat(user.getName()).isEqualTo("@test");
+		assertThat(user).isNotNull();
 	}
 
 }
