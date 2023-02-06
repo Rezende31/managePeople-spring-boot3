@@ -1,5 +1,6 @@
 package com.managePeople.managePeople.controllerTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -51,6 +52,15 @@ public class AddressControllerTest {
 		mvc.perform(get("/addresses")).andExpect(status().isOk())
 				.andExpect(jsonPath("$[0].logradouro", is("logradouro-1")))
 				.andExpect(jsonPath("$[1].logradouro", is("logradouro-2")));
+	}
+	
+	@Test
+	public void testFindById () {
+		Address address = new Address(1L, null, 1234, null, null, false, null);
+		service.insert(address);
+		when(service.findById(1L)).thenReturn(address);
+		assertThat(address.getId()).isEqualTo(1L);
+		assertThat(address.getCep()).isEqualTo(1234);
 	}
 	
 
