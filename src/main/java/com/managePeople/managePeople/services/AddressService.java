@@ -1,5 +1,6 @@
 package com.managePeople.managePeople.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +26,24 @@ public class AddressService {
 	}
 	
 	public Address insert( Address address) {
+		
+		if(address.isMain()) {
+			this.isMain(address);
+		}
+		
 		return repository.save(address);
+	}
+	
+	private void isMain(Address address) {
+		List<Address> listAddresses = repository.findAll();
+		Long idUser = address.getOwner().getId();
+		
+		for(int i=0; i<listAddresses.size(); i++ ) {
+			if(listAddresses.get(i).getOwner().getId() == idUser) {
+				listAddresses.get(i).setMain(false);
+			}
+		}
+		
+		
 	}
 }

@@ -26,7 +26,7 @@ public class Address implements Serializable{
 	private Integer cep;
 	private Integer number;
 	private String city;
-	//private boolean isMain;
+	private boolean isMain;
 	
 	//@JsonIgnore
 	@ManyToOne
@@ -37,15 +37,18 @@ public class Address implements Serializable{
 		super();
 	}
 
-	public Address(Long id, String logradouro, Integer cep, Integer number, String city, User owner) {
+
+	public Address(Long id, String logradouro, Integer cep, Integer number, String city, boolean isMain, User owner) {
 		super();
 		this.id = id;
 		this.logradouro = logradouro;
 		this.cep = cep;
 		this.number = number;
 		this.city = city;
+		this.isMain = isMain;
 		this.owner = owner;
 	}
+
 
 	public Long getId() {
 		return id;
@@ -86,6 +89,15 @@ public class Address implements Serializable{
 	public void setCity(String city) {
 		this.city = city;
 	}
+	
+	public boolean isMain() {
+		return isMain;
+	}
+
+
+	public void setMain(boolean isMain) {
+		this.isMain = isMain;
+	}
 
 	public User getOwner() {
 		return owner;
@@ -94,6 +106,7 @@ public class Address implements Serializable{
 	public void setOwner(User owner) {
 		this.owner = owner;
 	}
+	
 
 	@Override
 	public int hashCode() {

@@ -38,9 +38,9 @@ public class TestConfig implements CommandLineRunner {
 		User u2 = new User(null, "Bruno", data2);
 		User u3 = new User(null, "eu", null);
 		
-		Address a1 = new Address(null, "test Logradouro", 123456, 611, "Campinas", u1);
-		Address a2 = new Address(null, "test Logradouro", 13341089, 1036, "Vinhedo", u1);
-		Address a3 = new Address(null, "test Logradouro", 13341089, 1036, "Vinhedo", u2);
+		Address a1 = new Address(null, "test Logradouro 1", 123456, 611, "Campinas", true, u1);
+		Address a2 = new Address(null, "test Logradouro 2", 13341089, 1036, "Vinhedo",false, u1);
+		Address a3 = new Address(null, "test Logradouro 3", 13341089, 1036, "Vinhedo", true,u2);
 		
 		
 		userRepository.saveAll(Arrays.asList(u1, u2, u3));
